@@ -1,18 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
   const biolinkForm = document.getElementById("biolink-form");
+  const linkList = document.getElementById("link-list");
   const previewTitle = document.getElementById("preview-title");
   const previewDescription = document.getElementById("preview-description");
   const previewLogo = document.getElementById("preview-logo");
-  const themeColor = document.getElementById("theme-color");
+  const generateCodeBtn = document.getElementById("generate-code-btn");
+  const sourceCodeModal = document.getElementById("source-code-modal");
+  const closeModalBtn = document.querySelector(".close");
+  const copyCodeBtn = document.getElementById("copy-code-btn");
+  const sourceCodeTextarea = document.getElementById("source-code");
+  const clearBtn = document.getElementById("clear-btn");
 
-  // Predefined social media links
-  const socialLinks = {
-    whatsapp: "https://wa.me/",
-    facebook: "https://facebook.com/",
-    instagram: "https://instagram.com/",
-    twitter: "https://twitter.com/",
-    youtube: "https://youtube.com/"
-  };
+  // Handle form submission
+  biolinkForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // Get input values
+    const title = document.getElementById("link-title").value.trim();
+    const url = document.getElementById("link-url").value.trim();
+
+    if (title && url) {
+      // Create a new link item
+      const linkItem = document.createElement("a");
+      linkItem.href = url;
+      linkItem.textContent = title;
+      linkItem.target = "_blank";
+      linkItem.classList.add("link-item");
+
+      // Append to the preview section
+      linkList.appendChild(linkItem);
+
+      // Clear the form
+      document.getElementById("link-title").value = "";
+      document.getElementById("link-url").value = "";
+    } else {
+      alert("Please fill in both fields.");
+    }
+  });
 
   // Update preview title and description
   document.getElementById("page-title").addEventListener("input", (e) => {
@@ -34,25 +58,86 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Handle form submission
-  biolinkForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    // Get user inputs
+  // Generate source code
+  generateCodeBtn.addEventListener("click", () => {
     const pageTitle = document.getElementById("page-title").value.trim() || "Your Biolink Page";
     const pageDescription = document.getElementById("page-description").value.trim();
     const logoUrl = document.getElementById("logo-url").value.trim();
-    const selectedColor = themeColor.value;
 
-    // Update preview styles
-    document.querySelector(".biolink-preview").style.backgroundColor = selectedColor;
+    let linksHtml = "";
+    Array.from(linkList.children).forEach((link) => {
+      linksHtml += `<a href="${link.href}" target="_blank" style="display: block; margin: 10px 0; padding: 10px; background: #007bff; color: #fff; text-decoration: none; border-radius: 4px;">${link.textContent}</a>`;
+    });
 
-    // Update social media links dynamically
-    for (const [platform, url] of Object.entries(socialLinks)) {
-      const linkElement = document.querySelector(`.link-item.${platform}`);
-      linkElement.href = `${url}${pageTitle.toLowerCase().replace(/\s+/g, "")}`;
+    const sourceCode = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${pageTitle}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f8ff;
+      padding: 20px;
     }
+    img {
+      max-width: 100px;
+      margin: 0 auto 15px;
+    }
+    a {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      background: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  ${logoUrl ? `<img src="${logoUrl}" alt="Logo">` : ""}
+  <h1>${pageTitle}</h1>
+  <p>${pageDescription}</p>
+  ${linksHtml}
+</body>
+</html>
+    `;
 
-    alert("Biolink generated successfully!");
+    sourceCodeTextarea.value = sourceCode.trim();
+    sourceCodeModal.style.display = "block";
+  });
+
+  // Close modal
+  closeModalBtn.addEventListener("click", () => {
+    sourceCodeModal.style.display = "none";
+  });
+
+  // Copy source code
+  copyCodeBtn.addEventListener("click", () => {
+    sourceCodeTextarea.select();
+    document.execCommand("copy");
+    alert("Source code copied to clipboard!");
+  });
+
+  // Clear all inputs and preview
+  clearBtn.addEventListener("click", () => {
+    document.getElementById("logo-url").value = "";
+    document.getElementById("page-title").value = "";
+    document.getElementById("page-description").value = "";
+    document.getElementById("link-title").value = "";
+    document.getElementById("link-url").value = "";
+
+    previewLogo.src = "";
+    previewLogo.style.display = "none";
+    previewTitle.textContent = "Your Biolink Page";
+    previewDescription.textContent = "";
+    linkList.innerHTML = "";
   });
 });
