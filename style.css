@@ -29,7 +29,7 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
+h1, h2, h3 {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -44,7 +44,7 @@ label {
   font-weight: bold;
 }
 
-input[type="text"], input[type="url"] {
+input[type="text"], input[type="url"], textarea, select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -76,6 +76,12 @@ input[type="text"], input[type="url"] {
   border-radius: 8px;
 }
 
+.preview-logo {
+  max-width: 100px;
+  margin: 0 auto 15px; /* Center the logo */
+  display: block;
+}
+
 .link-list {
   margin-top: 20px;
 }
@@ -84,15 +90,34 @@ input[type="text"], input[type="url"] {
   display: block;
   margin: 10px 0;
   padding: 10px;
-  background: #007bff;
   color: #fff;
   text-decoration: none;
   border-radius: 4px;
   transition: background 0.3s ease;
 }
 
+.link-item.whatsapp {
+  background-color: #25D366;
+}
+
+.link-item.facebook {
+  background-color: #1877F2;
+}
+
+.link-item.instagram {
+  background-color: #E1306C;
+}
+
+.link-item.twitter {
+  background-color: #1DA1F2;
+}
+
+.link-item.youtube {
+  background-color: #FF0000;
+}
+
 .link-item:hover {
-  background: #0056b3;
+  opacity: 0.8;
 }
 
 /* Responsive Design */
