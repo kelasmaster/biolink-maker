@@ -78,7 +78,8 @@ input[type="text"], input[type="url"], textarea {
 
 .preview-logo {
   max-width: 100px;
-  margin-bottom: 15px;
+  margin: 0 auto 15px; /* Center the logo */
+  display: block;
 }
 
 .link-list {
