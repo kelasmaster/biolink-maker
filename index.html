@@ -11,7 +11,19 @@
     <!-- Input Section -->
     <section class="input-section">
       <h1>Create Your Biolink</h1>
-      <form id="link-form">
+      <form id="biolink-form">
+        <div class="form-group">
+          <label for="logo-url">Logo URL</label>
+          <input type="url" id="logo-url" placeholder="https://example.com/logo.png">
+        </div>
+        <div class="form-group">
+          <label for="page-title">Page Title</label>
+          <input type="text" id="page-title" placeholder="e.g., My Awesome Links" required>
+        </div>
+        <div class="form-group">
+          <label for="page-description">Page Description</label>
+          <textarea id="page-description" placeholder="Describe your biolink page..." rows="3"></textarea>
+        </div>
         <div class="form-group">
           <label for="link-title">Link Title</label>
           <input type="text" id="link-title" placeholder="e.g., My Website" required>
@@ -22,16 +34,29 @@
         </div>
         <button type="submit" class="btn">Add Link</button>
       </form>
+      <button id="generate-code-btn" class="btn">Generate Source Code</button>
     </section>
 
     <!-- Preview Section -->
     <section class="preview-section">
       <h2>Live Preview</h2>
       <div id="biolink-preview" class="biolink-preview">
-        <h3>Your Biolink Page</h3>
+        <img id="preview-logo" class="preview-logo" src="" alt="Logo" style="display: none;">
+        <h3 id="preview-title">Your Biolink Page</h3>
+        <p id="preview-description" class="preview-description"></p>
         <div id="link-list" class="link-list"></div>
       </div>
     </section>
+  </div>
+
+  <!-- Modal for Source Code -->
+  <div id="source-code-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Your Biolink Source Code</h3>
+      <textarea id="source-code" readonly></textarea>
+      <button id="copy-code-btn" class="btn">Copy Code</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
