@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeModalBtn = document.querySelector(".close");
   const copyCodeBtn = document.getElementById("copy-code-btn");
   const sourceCodeTextarea = document.getElementById("source-code");
+  const clearBtn = document.getElementById("clear-btn");
 
   // Handle form submission
   biolinkForm.addEventListener("submit", (e) => {
@@ -30,7 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
       linkList.appendChild(linkItem);
 
       // Clear the form
-      biolinkForm.reset();
+      document.getElementById("link-title").value = "";
+      document.getElementById("link-url").value = "";
     } else {
       alert("Please fill in both fields.");
     }
@@ -83,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     img {
       max-width: 100px;
-      margin-bottom: 15px;
+      margin: 0 auto 15px;
     }
     a {
       display: block;
@@ -122,5 +124,20 @@ document.addEventListener("DOMContentLoaded", () => {
     sourceCodeTextarea.select();
     document.execCommand("copy");
     alert("Source code copied to clipboard!");
+  });
+
+  // Clear all inputs and preview
+  clearBtn.addEventListener("click", () => {
+    document.getElementById("logo-url").value = "";
+    document.getElementById("page-title").value = "";
+    document.getElementById("page-description").value = "";
+    document.getElementById("link-title").value = "";
+    document.getElementById("link-url").value = "";
+
+    previewLogo.src = "";
+    previewLogo.style.display = "none";
+    previewTitle.textContent = "Your Biolink Page";
+    previewDescription.textContent = "";
+    linkList.innerHTML = "";
   });
 });
