@@ -11,16 +11,30 @@
     <!-- Input Section -->
     <section class="input-section">
       <h1>Create Your Biolink</h1>
-      <form id="link-form">
+      <form id="biolink-form">
         <div class="form-group">
-          <label for="link-title">Link Title</label>
-          <input type="text" id="link-title" placeholder="e.g., My Website" required>
+          <label for="logo-url">Logo URL</label>
+          <input type="url" id="logo-url" placeholder="https://example.com/logo.png">
         </div>
         <div class="form-group">
-          <label for="link-url">Link URL</label>
-          <input type="url" id="link-url" placeholder="https://example.com" required>
+          <label for="page-title">Page Title</label>
+          <input type="text" id="page-title" placeholder="e.g., My Awesome Links" required>
         </div>
-        <button type="submit" class="btn">Add Link</button>
+        <div class="form-group">
+          <label for="page-description">Page Description</label>
+          <textarea id="page-description" placeholder="Describe your biolink page..." rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="theme-color">Theme Color</label>
+          <select id="theme-color">
+            <option value="#007bff">Blue</option>
+            <option value="#ff5722">Orange</option>
+            <option value="#4caf50">Green</option>
+            <option value="#9c27b0">Purple</option>
+            <option value="#f44336">Red</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">Generate Biolink</button>
       </form>
     </section>
 
@@ -28,7 +42,17 @@
     <section class="preview-section">
       <h2>Live Preview</h2>
       <div id="biolink-preview" class="biolink-preview">
-        <div id="link-list" class="link-list"></div>
+        <img id="preview-logo" class="preview-logo" src="" alt="Logo" style="display: none;">
+        <h3 id="preview-title">Your Biolink Page</h3>
+        <p id="preview-description" class="preview-description"></p>
+        <div id="link-list" class="link-list">
+          <!-- Social Media Links -->
+          <a href="#" target="_blank" class="link-item whatsapp">WhatsApp</a>
+          <a href="#" target="_blank" class="link-item facebook">Facebook</a>
+          <a href="#" target="_blank" class="link-item instagram">Instagram</a>
+          <a href="#" target="_blank" class="link-item twitter">X/Twitter</a>
+          <a href="#" target="_blank" class="link-item youtube">YouTube</a>
+        </div>
       </div>
     </section>
   </div>
