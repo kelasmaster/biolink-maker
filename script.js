@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let linksHtml = "";
     Array.from(linkList.children).forEach((link) => {
-      linksHtml += `<a href="${link.href}" target="_blank" style="display: block; margin: 10px 0; padding: 10px; background: #007bff; color: #fff; text-decoration: none; border-radius: 4px;">${link.textContent}</a>`;
+      linksHtml += `<a href="${link.href}" target="_blank">${link.textContent}</a>`;
     });
 
     const sourceCode = `
